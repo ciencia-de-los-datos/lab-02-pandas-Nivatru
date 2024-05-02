@@ -237,9 +237,6 @@ def pregunta_13():
     df1 = tbl0
     df2 = tbl2
 
-    df1.set_index('_c0')
-    df2.set_index('_c0')
-
     df = pd.merge(df1, df2, on='_c0')
     df = df.groupby('_c1')['_c5b'].sum()
     return df
