@@ -234,9 +234,6 @@ def pregunta_13():
     Name: _c5b, dtype: int64
     """
 
-    df1 = tbl0
-    df2 = tbl2
-
-    df = pd.merge(df1, df2, on='_c0')
+    df = pd.merge(tbl0, tbl2, on = '_c0')
     df = df.groupby('_c1')['_c5b'].sum()
     return df
