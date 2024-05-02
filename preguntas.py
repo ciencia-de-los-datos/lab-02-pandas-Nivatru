@@ -48,8 +48,9 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return tbl0._c1.value_counts()
-
+    df = tbl0
+    df = df.groupby('_c1')['_c1'].count()
+    return df
 def pregunta_04():
     """
     Calcule el promedio de _c2 por cada letra de la _c1 del archivo `tbl0.tsv`.
@@ -168,13 +169,9 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-
-    df = tbl0
-    df = df.sort_values(by=['_c2'])
-    df['_c2'] = df['_c2'].astype("string")
-    df = df.groupby('_c1', as_index=False).agg({'_c2': ':'.join})
+    df = tbl0.groupby('_c1')['_c2'].apply(lambda x: ':'.join(map(str, sorted(x)))).reset_index()
+    df.set_index('_c1', inplace=True)
     return df
-
 
 def pregunta_11():
     """
